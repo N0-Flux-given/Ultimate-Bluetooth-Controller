@@ -1,0 +1,52 @@
+{
+    "leftStickVerticalMax": 100,
+    "leftStickVerticalMin": 200,
+    "leftStickHorizontalMax": 300,
+    "leftStickHorizontalMin": 400,
+    "rightStickVerticalMax": 500,
+    "rightStickVerticalMin": 600,
+    "rightStickHorizontalMax": 700,
+    "rightStickHorizontalMin": 800,
+    "btnValues": [
+        {
+            "upValue": "900",
+            "downValue": "901"
+        },
+        {
+            "upValue": "902",
+            "downValue": "903"
+        },
+        {
+            "upValue": "904",
+            "downValue": "905"
+        },
+        {
+            "upValue": "906",
+            "downValue": "907"
+        },
+        {
+            "upValue": "908",
+            "downValue": "909"
+        },
+        {
+            "upValue": "910",
+            "downValue": "911"
+        },
+        {
+            "upValue": "912",
+            "downValue": "913"
+        },
+        {
+            "upValue": "914",
+            "downValue": "915"
+        },
+        {
+            "upValue": "916",
+            "downValue": "917"
+        },
+        {
+            "upValue": "918",
+            "downValue": "919"
+        }
+    ]
+}
