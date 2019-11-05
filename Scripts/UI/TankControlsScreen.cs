@@ -36,7 +36,7 @@ public class TankControlsScreen : MonoBehaviour
 	private Coroutine changeColorCoroutine;
 	private int rightX, rightY, leftX, leftY;
 
-	private ControllerValues controllerValues;
+
 
 	private bool testBool;
 
@@ -44,8 +44,7 @@ public class TankControlsScreen : MonoBehaviour
 
 	private void Awake()
 	{
-		TextAsset controlJsonFile = Resources.Load<TextAsset>("ControllerValues");
-		controllerValues = JsonUtility.FromJson<ControllerValues>(controlJsonFile.ToString());
+		
 
 
 		canvasReference = transform.parent.GetComponent<CanvasScript>();
@@ -67,16 +66,16 @@ public class TankControlsScreen : MonoBehaviour
 	internal void OnLeftJoystickChange(Vector3 inputVector)
 	{
 		if (inputVector.x < 0)
-			leftX = (controllerValues.leftStickHorizontalMin + (int)(100f * inputVector.x * -1));
+			leftX = (fragReference.controllerValues.leftStickHorizontalMin + (int)(100f * inputVector.x * -1));
 		else if (inputVector.x > 0)
-			leftX = (controllerValues.leftStickHorizontalMax + (int)(100f * inputVector.x));
+			leftX = (fragReference.controllerValues.leftStickHorizontalMax + (int)(100f * inputVector.x));
 		else
 			leftX = 0;
 
 		if (inputVector.y < 0)
-			leftY = (controllerValues.leftStickVerticalMin + (int)(100f * inputVector.x * -1));
+			leftY = (fragReference.controllerValues.leftStickVerticalMin + (int)(100f * inputVector.x * -1));
 		else if (inputVector.y > 0)
-			leftY = (controllerValues.leftStickVerticalMax + (int)(100f * inputVector.x));
+			leftY = (fragReference.controllerValues.leftStickVerticalMax + (int)(100f * inputVector.x));
 		else
 			leftY = 0;
 	}
@@ -84,16 +83,16 @@ public class TankControlsScreen : MonoBehaviour
 	internal void OnRightJoystickChange(Vector3 inputVector)
 	{
 		if (inputVector.x < 0)
-			rightX = (controllerValues.rightStickHorizontalMin + (int)(100f * inputVector.x * -1));
+			rightX = (fragReference.controllerValues.rightStickHorizontalMin + (int)(100f * inputVector.x * -1));
 		else if (inputVector.x > 0)
-			rightX = (controllerValues.rightStickHorizontalMax + (int)(100f * inputVector.x));
+			rightX = (fragReference.controllerValues.rightStickHorizontalMax + (int)(100f * inputVector.x));
 		else
 			rightX = 0;
 
 		if (inputVector.y < 0)
-			rightY = (controllerValues.rightStickVerticalMin + (int)(100f * inputVector.x * -1));
+			rightY = (fragReference.controllerValues.rightStickVerticalMin + (int)(100f * inputVector.x * -1));
 		else if (inputVector.y > 0)
-			rightY = (controllerValues.rightStickVerticalMax + (int)(100f * inputVector.x));
+			rightY = (fragReference.controllerValues.rightStickVerticalMax + (int)(100f * inputVector.x));
 		else
 			rightY = 0;
 	}
@@ -104,64 +103,64 @@ public class TankControlsScreen : MonoBehaviour
 		{
 			case ButtonType.CIRCLE:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.CIRCLE].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.CIRCLE].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.CIRCLE].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.CIRCLE].upValue);
 				break;
 
 			case ButtonType.CROSS:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.CROSS].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.CROSS].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.CROSS].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.CROSS].upValue);
 				break;
 			case ButtonType.TRIANGLE:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.TRIANGLE].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.TRIANGLE].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.TRIANGLE].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.TRIANGLE].upValue);
 				break;
 			case ButtonType.SQUARE:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.SQUARE].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.SQUARE].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.SQUARE].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.SQUARE].upValue);
 				break;
 			case ButtonType.LEFT:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.LEFT].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.LEFT].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.LEFT].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.LEFT].upValue);
 				break;
 			case ButtonType.RIGHT:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.RIGHT].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.RIGHT].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.RIGHT].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.RIGHT].upValue);
 				break;
 			case ButtonType.TOP:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.TOP].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.TOP].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.TOP].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.TOP].upValue);
 				break;
 			case ButtonType.DOWN:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.DOWN].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.DOWN].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.DOWN].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.DOWN].upValue);
 				break;
 			case ButtonType.L1:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.L1].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.L1].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.L1].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.L1].upValue);
 				break;
 			case ButtonType.R1:
 				if (down)
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.R1].downValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.R1].downValue);
 				else
-					SendCharacter(controllerValues.btnValues[(int)ButtonType.R1].upValue);
+					SendCharacter(fragReference.controllerValues.btnValues[(int)ButtonType.R1].upValue);
 				break;
 		}
 	}

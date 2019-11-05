@@ -46,6 +46,7 @@ public class FragTest : MonoBehaviour
 	public static event NativeException NativeExceptionEvent;
 	public static event OnResume OnResumeEvent;
 
+	internal ControllerValues controllerValues;
 
 	internal ConnectionStatus currentStatus;
 
@@ -65,6 +66,8 @@ public class FragTest : MonoBehaviour
 	{
 		GenerateBtnJSON();
 		InitializePlugin();
+		TextAsset controlJsonFile = Resources.Load<TextAsset>("ControllerValues");
+		controllerValues = JsonUtility.FromJson<ControllerValues>(controlJsonFile.ToString());
 	}
 	private void Start()
 	{
