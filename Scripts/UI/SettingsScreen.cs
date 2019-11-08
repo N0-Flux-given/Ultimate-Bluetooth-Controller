@@ -9,60 +9,72 @@ public class SettingsScreen : MonoBehaviour
 	private CanvasScript canvasReference;
 	private FragTest fragReference;
 
-	public Button btnCross, btnCircle, btnSquare, btnTriangle;
-	public Button btnLeft, btnRight, btnTop, btnBottom;
+	private static string prefEncoding = "encoding", prefPressMode = "pressmode";
 
-	public Text[] upValues = new Text[10];
-	public Text[] downValues = new Text[10];
+	public Color txtDark, btnYellow, txtLight, btnGrey;
+	public Button btnASCII, btnUnicode, btnBinary;
+
+	
 
 
 
 
 	private void Awake()
 	{
-		LoadReferences();
-		
+		btnBack = transform.Find("TopBar/BtnBack").GetComponent<Button>();
+		btnBack.onClick.AddListener(OnBackPress);
 
+		btnASCII.onClick.AddListener(OnASCIIClick);
+		btnUnicode.onClick.AddListener(OnUnicodeClick);
+		btnBinary.onClick.AddListener(OnBinaryClick);
 	}
 
 
-	#region Button Click Callbacks
 
-	private void OnClickCircle()
+	private void SetButtonColours()
+	{
+		if(PlayerPrefs.GetInt(prefEncoding) == -1)//Pref does not exist
+		{
+			PlayerPrefs.SetInt(prefEncoding, 0);  //0 -> ASCII, 1 -> Unicode, 2 -> Binary
+		}
+		else
+		{
+			switch(PlayerPrefs.GetInt(prefEncoding))
+			{
+				case 0:
+					
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+			}
+		}
+	}
+
+
+	private void ToggleBtnColour(Button button,bool active)
+	{
+		if(active)
+		{
+			button.GetComponent<Image>().color = btnYellow;
+			button.transform.GetChild(0).GetComponent<Image>().color = txtLight;
+		}
+	}
+
+
+	private void OnASCIIClick()
 	{
 
 	}
-	private void OnClickCross()
+	private void OnUnicodeClick()
 	{
 
 	}
-	private void OnClickSquare()
+	private void OnBinaryClick()
 	{
 
 	}
-	private void OnClickTriangle()
-	{
-
-	}
-	private void OnClickLeft()
-	{
-
-	}
-	private void OnClickRight()
-	{
-
-	}
-	private void OnClickTop()
-	{
-
-	}
-	private void OnClickBottom()
-	{
-
-	}
-
-
-	#endregion
 
 	private void OnEnable()
 	{
@@ -73,31 +85,7 @@ public class SettingsScreen : MonoBehaviour
 		CanvasScript.BackEvent -= OnBackPress;
 	}
 
-	private void LoadReferences()
-	{
-		canvasReference = transform.parent.GetComponent<CanvasScript>();
-		fragReference = canvasReference.fragReference;
-		btnBack = transform.Find("TopBar/BtnBack").GetComponent<Button>();
-		btnBack.onClick.AddListener(OnBackPress);
-		btnCircle.onClick.AddListener(OnClickCircle);
-		btnCross.onClick.AddListener(OnClickCross);
-		btnSquare.onClick.AddListener(OnClickSquare);
-		btnTriangle.onClick.AddListener(OnClickTriangle);
-
-		btnLeft.onClick.AddListener(OnClickLeft);
-		btnRight.onClick.AddListener(OnClickRight);
-		btnTop.onClick.AddListener(OnClickTop);
-		btnBottom.onClick.AddListener(OnClickBottom);
-
-
-		for (int i = 0; i < 8; i++)
-		{
-			upValues[i].text = "Up: " + fragReference.controllerValues.btnValues[i].upValue;
-			downValues[i].text = "Down " + fragReference.controllerValues.btnValues[i].downValue;
-
-		}
-
-	}
+	
 
 	private void OnBackPress()
 	{

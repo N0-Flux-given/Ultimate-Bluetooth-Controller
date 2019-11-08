@@ -13,7 +13,7 @@ public class CanvasScript : MonoBehaviour
 	internal bool btPromptShown;
 	public enum Screens
 	{
-		MainScreen, TankControlsScreen, BTNotSupported, ConnectingScreen, SettingsScreen
+		MainScreen, TankControlsScreen, BTNotSupported, ConnectingScreen, SettingsScreen, ReMapScreen
 	}
 	public AnimationCurve defaultAnimationCurve;
 	public float defaultTransitionTime = 6f;
