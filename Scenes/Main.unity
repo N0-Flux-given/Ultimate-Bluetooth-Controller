@@ -6692,34 +6692,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c46be94a53dd9d4b9e24bfb8848ce94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnCross: {fileID: 0}
-  btnCircle: {fileID: 0}
+  btnCross: {fileID: 1335277722}
+  btnCircle: {fileID: 385746101}
   btnSquare: {fileID: 0}
-  btnTriangle: {fileID: 0}
+  btnTriangle: {fileID: 1679141646}
   btnLeft: {fileID: 0}
   btnRight: {fileID: 0}
   btnTop: {fileID: 0}
   btnBottom: {fileID: 0}
   upValues:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 76199885}
+  - {fileID: 1353588678}
+  - {fileID: 501000800}
+  - {fileID: 129673031}
+  - {fileID: 789435437}
+  - {fileID: 650291732}
+  - {fileID: 190185365}
+  - {fileID: 1542406033}
   - {fileID: 0}
   - {fileID: 0}
   downValues:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1249013973}
+  - {fileID: 1951655819}
+  - {fileID: 762903213}
+  - {fileID: 1196172229}
+  - {fileID: 1710599052}
+  - {fileID: 294886952}
+  - {fileID: 1915034809}
+  - {fileID: 1695838940}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!1 &1249013971
@@ -11264,6 +11264,11 @@ MonoBehaviour:
   btnYellow: {r: 1, g: 0.7882353, b: 0, a: 1}
   txtLight: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
   btnGrey: {r: 0.20784314, g: 0.16862746, b: 0, a: 1}
+  btnASCII: {fileID: 1015266330}
+  btnUnicode: {fileID: 1401184296}
+  btnBinary: {fileID: 1150148604}
+  btnCont: {fileID: 424711430}
+  btnPressRel: {fileID: 534268435}
 --- !u!1 &2010429631
 GameObject:
   m_ObjectHideFlags: 0
