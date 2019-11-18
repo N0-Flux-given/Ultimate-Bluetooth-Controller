@@ -17,7 +17,10 @@ public class RemapScreen : MonoBehaviour
 	public Text[] upValues = new Text[10];
 	public Text[] downValues = new Text[10];
 
-
+	private void Awake()
+	{
+		LoadReferences();
+	}
 	private void LoadReferences()
 	{
 		canvasReference = transform.parent.GetComponent<CanvasScript>();
@@ -34,19 +37,29 @@ public class RemapScreen : MonoBehaviour
 		btnRight.onClick.AddListener(OnClickRight);
 		btnTop.onClick.AddListener(OnClickTop);
 		btnBottom.onClick.AddListener(OnClickBottom);
+	}
 
+	private void SetButtonValues()
+	{
+		int savedPref = PlayerPrefs.GetInt("pressmode");
 
-		for (int i = 0; i < 8; i++)
-		{
-			upValues[i].text = "Up: " + fragReference.controllerValues.btnValues[i].upValue;
-			downValues[i].text = "Down " + fragReference.controllerValues.btnValues[i].downValue;
-
-		}
-
+		if (savedPref == 1)     //Pref valus 1 -> Up/Down
+			for (int i = 0; i < 8; i++)
+			{
+				upValues[i].text = "Up: " + fragReference.controllerValues.btnValues[i].upValue;
+				downValues[i].text = "Down " + fragReference.controllerValues.btnValues[i].downValue;
+			}
+		else if (savedPref == 0 || savedPref == -1)   //Pref does not exist or is 0 -> continous mode
+			for (int i = 0; i < 8; i++)
+			{
+				upValues[i].text = fragReference.controllerValues.btnValues[i].upValue;
+				downValues[i].text = string.Empty;
+			}
 	}
 
 	private void OnEnable()
 	{
+		SetButtonValues();
 		CanvasScript.BackEvent += OnBackPress;
 	}
 	private void OnDisable()
@@ -66,6 +79,9 @@ public class RemapScreen : MonoBehaviour
 	}
 	private void OnClickCross()
 	{
+		print("cross value changed to 69!");
+		fragReference.controllerValues.btnValues[1].upValue = 69.ToString();
+		SaveNewValue();
 
 	}
 	private void OnClickSquare()
@@ -93,6 +109,13 @@ public class RemapScreen : MonoBehaviour
 
 	}
 
+
+	private void SaveNewValue()
+	{
+		string updatedValues = JsonUtility.ToJson(fragReference.controllerValues);
+		PlayerPrefs.SetString(FragTest.prefControllerJson, updatedValues);
+		SetButtonValues();
+	}
 
 	#endregion
 }

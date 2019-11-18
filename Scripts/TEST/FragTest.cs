@@ -49,6 +49,7 @@ public class FragTest : MonoBehaviour
 	internal ControllerValues controllerValues;
 
 	internal ConnectionStatus currentStatus;
+	internal static string prefControllerJson = "controllerJson";
 
 	public CanvasScript canvasReference;
 	//{
@@ -67,15 +68,20 @@ public class FragTest : MonoBehaviour
 		GenerateBtnJSON();
 		InitializePlugin();
 		TextAsset controlJsonFile = Resources.Load<TextAsset>("ControllerValues");
-		controllerValues = JsonUtility.FromJson<ControllerValues>(controlJsonFile.ToString());
+		if (PlayerPrefs.GetString(prefControllerJson) == string.Empty)
+			PlayerPrefs.SetString(prefControllerJson, controlJsonFile.ToString());
+		controllerValues = JsonUtility.FromJson<ControllerValues>(PlayerPrefs.GetString(prefControllerJson));
 	}
-	private void Start()
-	{
 
 
-	}
 
 	#endregion
+
+	internal void ResetControls()
+	{
+		TextAsset controlJsonFile = Resources.Load<TextAsset>("ControllerValues");
+		PlayerPrefs.SetString(prefControllerJson, controlJsonFile.ToString());
+	}
 
 
 	public void OnBluetoothStateChange(string state)
@@ -220,7 +226,7 @@ public class FragTest : MonoBehaviour
 
 	public void OnConnectionStatusReport(string status)
 	{
-		
+
 		switch (status)
 		{
 			case "con":
@@ -229,7 +235,7 @@ public class FragTest : MonoBehaviour
 				break;
 			case "ctd":
 				currentStatus = ConnectionStatus.STATUS_CONNECTED;
-				ConnectionStatusEvent?.Invoke(ConnectionStatus.STATUS_CONNECTED);				
+				ConnectionStatusEvent?.Invoke(ConnectionStatus.STATUS_CONNECTED);
 				break;
 
 			case "err":   //GOt an exception while trying to connect
@@ -282,10 +288,10 @@ public class LogMessageJson
 public class ButtonValues
 {
 	public string upValue;
-	public string downValue;	
+	public string downValue;
 }
 
-[System.Serializable] 
+[System.Serializable]
 public class ControllerValues
 {
 	public int leftStickVerticalMax = 100, leftStickVerticalMin = 200, leftStickHorizontalMax = 300, leftStickHorizontalMin = 400;
