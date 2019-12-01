@@ -99,7 +99,7 @@ public class MainMenuScript : MonoBehaviour
 		if(fragTestReference.hasBluetoothAdapter)
 		{
 			print("Has bt adapter true");
-			if(fragTestReference.BluetoothStatus())   //Bluetooth is on
+			if(fragTestReference.BluetoothStatus())   //Bluetooth is on  
 			{
 				print("BT is on, oriinting list");
 				descriptionText.text = btOnDesctiption;

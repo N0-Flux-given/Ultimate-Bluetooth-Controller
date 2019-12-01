@@ -21,13 +21,13 @@ public class SettingsScreen : MonoBehaviour
 		canvasReference = transform.parent.GetComponent<CanvasScript>();
 		btnBack = transform.Find("TopBar/BtnBack").GetComponent<Button>();
 		btnBack.onClick.AddListener(OnBackPress);
-		btnRemapControls = transform.Find("TopBar/RemapControls/btnRemapControls").GetComponent<Button>();
+		btnRemapControls = transform.Find("TopBar/Root/RemapControls/btnRemapControls").GetComponent<Button>();
 		btnRemapControls.onClick.AddListener(OnRemapControlsClick);
 
 		btnASCII.onClick.AddListener(OnASCIIClick);
 		btnUnicode.onClick.AddListener(OnUnicodeClick);
 		btnBinary.onClick.AddListener(OnBinaryClick);
-
+		  
 		btnCont.onClick.AddListener(OnContClick);
 		btnPressRel.onClick.AddListener(OnPressRelCkick);
 

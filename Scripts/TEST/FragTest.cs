@@ -81,6 +81,8 @@ public class FragTest : MonoBehaviour
 	{
 		TextAsset controlJsonFile = Resources.Load<TextAsset>("ControllerValues");
 		PlayerPrefs.SetString(prefControllerJson, controlJsonFile.ToString());
+		controllerValues = JsonUtility.FromJson<ControllerValues>(controlJsonFile.ToString());
+
 	}
 
 

@@ -7,18 +7,18 @@ using System.Text;
 
 public enum ButtonType
 {
-	TRIANGLE,
-	SQUARE,
-	CIRCLE,
-	CROSS,
+	TRIANGLE,  //0
+	SQUARE,    //1
+	CIRCLE,   //2
+	CROSS,    //3
 
-	TOP,
-	LEFT,
-	RIGHT,
-	DOWN,
+	TOP,     //4
+	LEFT,    //5
+	RIGHT,   //6
+	DOWN,   //7
 
-	R1,
-	L1
+	R1,    //8, not used
+	L1    //9, not used
 }
 
 
@@ -50,9 +50,9 @@ public class TankControlsScreen : MonoBehaviour
 		canvasReference = transform.parent.GetComponent<CanvasScript>();
 		testBtn.onClick.AddListener(OnTestButtonClick);
 		fragReference = canvasReference.fragReference;
-		logBox = transform.Find("LogBox").GetComponent<LogBox>();
-		rightCluster = transform.Find("RightCluster");
-		leftCluster = transform.Find("LeftCluster");
+		logBox = transform.Find("Root/LogBox").GetComponent<LogBox>();
+		rightCluster = transform.Find("Root/RightCluster");
+		leftCluster = transform.Find("Root/LeftCluster");
 
 		rightClusterOutline = rightCluster.Find("Outline").GetComponent<Image>();
 		leftClusterOutline = leftCluster.Find("Outline").GetComponent<Image>();
@@ -75,11 +75,13 @@ public class TankControlsScreen : MonoBehaviour
 			leftX = 0;
 
 		if (inputVector.y < 0)
-			leftY = (fragReference.controllerValues.leftStickVerticalMin + (int)(100f * inputVector.x * -1));
+			leftY = (fragReference.controllerValues.leftStickVerticalMin + (int)(100f * inputVector.y * -1));
 		else if (inputVector.y > 0)
-			leftY = (fragReference.controllerValues.leftStickVerticalMax + (int)(100f * inputVector.x));
+			leftY = (fragReference.controllerValues.leftStickVerticalMax + (int)(100f * inputVector.y));
 		else
 			leftY = 0;
+		SendJoystickValue(leftX);
+		SendJoystickValue(leftY);
 	}
 
 	internal void OnRightJoystickChange(Vector3 inputVector)
@@ -92,11 +94,13 @@ public class TankControlsScreen : MonoBehaviour
 			rightX = 0;
 
 		if (inputVector.y < 0)
-			rightY = (fragReference.controllerValues.rightStickVerticalMin + (int)(100f * inputVector.x * -1));
+			rightY = (fragReference.controllerValues.rightStickVerticalMin + (int)(100f * inputVector.y * -1));
 		else if (inputVector.y > 0)
-			rightY = (fragReference.controllerValues.rightStickVerticalMax + (int)(100f * inputVector.x));
+			rightY = (fragReference.controllerValues.rightStickVerticalMax + (int)(100f * inputVector.y));
 		else
 			rightY = 0;
+		SendJoystickValue(rightX);
+		SendJoystickValue(rightY);
 	}
 
 	internal void OnButtonInteraction(ButtonType type, bool down)
@@ -220,6 +224,12 @@ public class TankControlsScreen : MonoBehaviour
 		isCoroutineRunning = false;
 	}
 
+	private void SendJoystickValue(int value)
+	{
+		logBox.AddLog(value.ToString(), LogMessageColours.GREEN);
+		fragReference.SendByte(Encoding.ASCII.GetBytes(value.ToString()));
+	}
+
 	private void SendCharacter(string character, bool isDown)
 	{
 		byte[] bytes;
@@ -228,43 +238,40 @@ public class TankControlsScreen : MonoBehaviour
 			case -1:
 			case 0:
 				bytes = Encoding.ASCII.GetBytes(character);
-				print("In ascii");
 				break;
 			case 1:
 				bytes = Encoding.Unicode.GetBytes(character);
-				print("In unicode");
 				break;
 			case 2:
 				bytes = Encoding.ASCII.GetBytes(character);
-				print("in case 2");
 				break;
 			default:
 				bytes = Encoding.ASCII.GetBytes(character);
-				print("In default");
 				break;
 		}
-	//	byte[] bytes = Encoding.Unicode.GetBytes(character);
+		//	byte[] bytes = Encoding.Unicode.GetBytes(character);
 		print("COnt mode : " + continousMode);
 		if (!continousMode)
 		{
 			fragReference.SendByte(bytes);
-			print(bytes[0].ToString());
+			logBox.AddLog(character, LogMessageColours.GREEN);
 		}
 		else
 		{
-			if (isDown)
-				contSendCoroutine = StartCoroutine(SendContinously(bytes));
+			if (isDown)			
+				contSendCoroutine = StartCoroutine(SendContinously(bytes, character));			
 			else
 				if (contSendCoroutine != null)
 				StopCoroutine(contSendCoroutine);
 		}
 	}
-	private IEnumerator SendContinously(byte[] bytes)
+	private IEnumerator SendContinously(byte[] bytes, string character)
 	{
 		WaitForSeconds delay = new WaitForSeconds(0.5f);
 		while (true)
 		{
 			fragReference.SendByte(bytes);
+		    logBox.AddLog(character, LogMessageColours.GREEN);
 			yield return delay;
 		}
 	}
