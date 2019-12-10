@@ -45,7 +45,6 @@ public class CanvasScript : MonoBehaviour
 		{
 			screenMap.Add(transform.GetChild(i));
 		}
-		print("Added " + childCount + " screens to list!");
 	}
 
 

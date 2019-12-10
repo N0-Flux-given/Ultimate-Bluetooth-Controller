@@ -122,7 +122,6 @@ public class FragTest : MonoBehaviour
 
 	public void CallbackFromJava(string arg)
 	{
-		print("Callback from java!! arg : " + arg);
 	}
 
 
@@ -137,7 +136,6 @@ public class FragTest : MonoBehaviour
 	private void InitializeBluetooth()
 	{
 		hasBluetoothAdapter = pluginInstance.Call<bool>("getBluetoothAdapter");
-		print("hasBTStatus : " + hasBluetoothAdapter);
 
 	}
 
@@ -182,12 +180,10 @@ public class FragTest : MonoBehaviour
 	}
 	internal void ConnectTo(int index)
 	{
-		print("COnnect to called index :" + index);
 		pluginInstance.Call("connectTo", index);
 	}
 	internal void CancelConnection()
 	{
-		print("Cancel connection called!");
 		pluginInstance.Call("cancelConnection");
 	}
 
@@ -203,7 +199,6 @@ public class FragTest : MonoBehaviour
 
 	public void CallbackFromAndroid(string message)
 	{
-		print(message);
 	}
 
 	public void BTrequestCallback(string result)
@@ -218,7 +213,6 @@ public class FragTest : MonoBehaviour
 	{
 		LogMessageJson obj = JsonUtility.FromJson<LogMessageJson>(whatHappened);
 		NativeExceptionEvent?.Invoke(obj.message, (LogMessageColours)obj.colour);
-		print("caught exception colour : " + (LogMessageColours)obj.colour);
 	}
 
 	public void OnResumeCallback(string args)
@@ -271,7 +265,6 @@ public class FragTest : MonoBehaviour
 		controllerValues.btnValues[8] = new ButtonValues { upValue = "916", downValue = "917" };
 		controllerValues.btnValues[9] = new ButtonValues { upValue = "918", downValue = "919" };
 
-		print(JsonUtility.ToJson(controllerValues, true));
 	}
 
 	#endregion

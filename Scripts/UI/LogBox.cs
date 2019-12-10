@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class LogBox : MonoBehaviour
 {
+
 	internal Text[] logText = new Text[10];
-	int currentLogIndex = 0;
-
-
 	private void Awake()
 	{
 
@@ -40,7 +38,6 @@ public class LogBox : MonoBehaviour
 		{
 			logText[i].text = logText[i - 1].text;
 			logText[i].color = logText[i - 1].color;
-
 		}
 		logText[0].text = logMessage;
 		logText[0].color = textColour;

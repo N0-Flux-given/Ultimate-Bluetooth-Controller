@@ -161,7 +161,6 @@ public class SettingsScreen : MonoBehaviour
 
 	private void OnBackPress()
 	{
-		print("In back press function");
 		canvasReference.TransitionToScreen(CanvasScript.Screens.SettingsScreen, CanvasScript.Screens.MainScreen);
 	}
 }

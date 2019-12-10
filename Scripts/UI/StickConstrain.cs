@@ -25,7 +25,6 @@ public class StickConstrain : MonoBehaviour
 		state++;
 		if (state >= 3)
 			state = 0;
-		print(state);
 		switch(state)
 		{
 			case 0:

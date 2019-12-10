@@ -30,7 +30,7 @@ public class TankControlsScreen : MonoBehaviour
 	private FragTest fragReference;
 	private LogBox logBox;
 	int testInt = 0;
-	private Color connectedGreen = Color.green, disconnectedRed = Color.red;
+	public Color connectedGreen, disconnectedRed;
 	private Image rightClusterOutline, leftClusterOutline;
 	private Transform rightCluster, leftCluster;
 	private Coroutine changeColorCoroutine, contSendCoroutine;
@@ -38,12 +38,12 @@ public class TankControlsScreen : MonoBehaviour
 
 	private bool isCoroutineRunning, continousMode;
 
+	  
 
-
-	private bool testBool;
+	private bool testBool;   
 
 	private void Awake()
-	{
+	{    
 
 
 
@@ -250,7 +250,6 @@ public class TankControlsScreen : MonoBehaviour
 				break;
 		}
 		//	byte[] bytes = Encoding.Unicode.GetBytes(character);
-		print("COnt mode : " + continousMode);
 		if (!continousMode)
 		{
 			fragReference.SendByte(bytes);
@@ -300,7 +299,6 @@ public class TankControlsScreen : MonoBehaviour
 			continousMode = true;
 		else
 			continousMode = false;
-		print("COnt mode in onenable : " + continousMode + " Pref value : " + PlayerPrefs.GetInt(SettingsScreen.prefPressMode));
 		SetOutlineColour();
 		logBox.ClearLogs();
 		CanvasScript.BackEvent += OnBackPress;

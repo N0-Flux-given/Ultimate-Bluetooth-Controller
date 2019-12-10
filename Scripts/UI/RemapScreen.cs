@@ -124,7 +124,6 @@ public class RemapScreen : MonoBehaviour
 	}
 	private void OnSetClick()
 	{
-		print(resetInputFieldUp.text);
 		inputPopup.gameObject.SetActive(false);
 		fragReference.controllerValues.btnValues[currentBtnIndex].upValue = resetInputFieldUp.text;
 		fragReference.controllerValues.btnValues[currentBtnIndex].downValue = resetInputFieldDown.text;
@@ -161,6 +160,7 @@ public class RemapScreen : MonoBehaviour
 
 	private void OnClickCircle()
 	{
+		currentBtnIndex = 2;
 		currentBtnIndex = 2;
 		ShowRemapContPopup();
 	}

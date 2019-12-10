@@ -33,7 +33,6 @@ public class MainMenuScript : MonoBehaviour
 
 	private void OnEnable()
 	{
-		print(CreateFAKEJson());
 		testButton.onClick.AddListener(TestButtonFunction);
 		//btnCancel.onClick.AddListener(CancelConnectionBtn);
 		InitializeBluetooth();
@@ -62,7 +61,6 @@ public class MainMenuScript : MonoBehaviour
 
 	private void TestButtonFunction()
 	{
-		print("Test button pressed, tyransitioning to tank control screen");
 		//canvasReference.TransitionToPopup(CanvasScript.Screens.EnableBTPrompt, true);
 		canvasReference.TransitionToScreen(CanvasScript.Screens.MainScreen, CanvasScript.Screens.TankControlsScreen);
 	}
@@ -95,19 +93,15 @@ public class MainMenuScript : MonoBehaviour
 
 	internal void InitializeBluetooth()
 	{
-		print("Main menu init bt called!");
 		if(fragTestReference.hasBluetoothAdapter)
 		{
-			print("Has bt adapter true");
 			if(fragTestReference.BluetoothStatus())   //Bluetooth is on  
 			{
-				print("BT is on, oriinting list");
 				descriptionText.text = btOnDesctiption;
 				PopulateScrollView();
 			}
 			else										//Bluetooth id off
 			{
-				print("BT is off");
 				descriptionText.text = "Turn on Bluetooth to see the list of paired devices.";
 				SetInfoText("Bluetooth is off");
 				if(!canvasReference.btPromptShown)
@@ -118,7 +112,6 @@ public class MainMenuScript : MonoBehaviour
 		else
 		{
 			//SHow BT not supported
-			print("BT not supported lmao");
 		}
 	}
 
