@@ -15,6 +15,8 @@ public class StickConstrain : MonoBehaviour
 	private int state;
 	public LogBox logBox;
 
+	internal int leftConstrain, rightConstrain;
+
 	private void Awake()
 	{
 		btn.onClick.AddListener(OnButtonClicked);
@@ -36,16 +38,18 @@ public class StickConstrain : MonoBehaviour
 					leftStick.xFactor = 1;
 					leftStick.yFactor = 1;
 					logBox.AddLog("Left Joystick constrains removed", LogMessageColours.GREEN);
+					leftConstrain = 0;
 				}
 				else
 				{
 					rightStick.xFactor = 1;
 					rightStick.yFactor = 1;
 					logBox.AddLog("Right Joystick constrains removed", LogMessageColours.GREEN);
+					rightConstrain = 0;
 				}
 
 				break;
-			case 1:
+			case 1:				
 				imgVertical.gameObject.SetActive(true);
 				imgHorizontal.gameObject.SetActive(false);
 				imgOff.gameObject.SetActive(false);
@@ -54,12 +58,14 @@ public class StickConstrain : MonoBehaviour
 					leftStick.xFactor = 0;
 					leftStick.yFactor = 1;
 					logBox.AddLog("Left Joystick constrained vertically", LogMessageColours.GREEN);
+					leftConstrain = 1;
 				}
 				else
 				{
 					rightStick.xFactor = 0;
 					rightStick.yFactor = 1;
 					logBox.AddLog("Right Joystick constrained vertically", LogMessageColours.GREEN);
+					rightConstrain = 1;
 				}
 				break;
 			case 2:
@@ -71,12 +77,14 @@ public class StickConstrain : MonoBehaviour
 					leftStick.xFactor = 1;
 					leftStick.yFactor = 0;
 					logBox.AddLog("Left Joystick constrained horizontally", LogMessageColours.GREEN);
+					leftConstrain = 2;
 				}
 				else
 				{
 					rightStick.xFactor = 1;
 					rightStick.yFactor = 0;
 					logBox.AddLog("Right Joystick constrained horizontally", LogMessageColours.GREEN);
+					rightConstrain = 2;
 				}
 				break;
 

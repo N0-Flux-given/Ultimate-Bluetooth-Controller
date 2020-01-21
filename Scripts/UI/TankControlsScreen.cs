@@ -38,6 +38,8 @@ public class TankControlsScreen : MonoBehaviour
 
 	private bool isCoroutineRunning, continousMode;
 
+	public StickConstrain leftConstrain, rightConstrain;
+
 	  
 
 	private bool testBool;   
@@ -80,8 +82,24 @@ public class TankControlsScreen : MonoBehaviour
 			leftY = (fragReference.controllerValues.leftStickVerticalMax + (int)(100f * inputVector.y));
 		else
 			leftY = 0;
-		SendJoystickValue(leftX);
-		SendJoystickValue(leftY);
+
+		switch(leftConstrain.leftConstrain)
+		{
+			case 0:
+				SendJoystickValue(leftX);
+				SendJoystickValue(leftY);
+				break;
+			case 1:   ///Vertical constrain
+				SendJoystickValue(leftY);
+				break;
+			case 2:
+				SendJoystickValue(leftX);
+				break;
+		}
+		//SendJoystickValue(leftX);
+		//SendJoystickValue(leftY);
+		
+
 	}
 
 	internal void OnRightJoystickChange(Vector3 inputVector)
@@ -99,8 +117,21 @@ public class TankControlsScreen : MonoBehaviour
 			rightY = (fragReference.controllerValues.rightStickVerticalMax + (int)(100f * inputVector.y));
 		else
 			rightY = 0;
-		SendJoystickValue(rightX);
-		SendJoystickValue(rightY);
+		switch (rightConstrain.rightConstrain)
+		{
+			case 0:
+				SendJoystickValue(rightX);
+				SendJoystickValue(rightY);
+				break;
+			case 1:   ///Vertical constrain
+				SendJoystickValue(rightY);
+				break;
+			case 2:
+				SendJoystickValue(rightX);
+				break;
+		}
+		//SendJoystickValue(rightX);
+		//SendJoystickValue(rightY);
 	}
 
 	internal void OnButtonInteraction(ButtonType type, bool down)
@@ -266,7 +297,7 @@ public class TankControlsScreen : MonoBehaviour
 	}
 	private IEnumerator SendContinously(byte[] bytes, string character)
 	{
-		WaitForSeconds delay = new WaitForSeconds(0.5f);
+		WaitForSeconds delay = new WaitForSeconds(0.25f);
 		while (true)
 		{
 			fragReference.SendByte(bytes);

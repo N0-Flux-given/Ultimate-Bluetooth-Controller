@@ -132,7 +132,7 @@ public class RemapScreen : MonoBehaviour
 	private void ShowRemapContPopup()
 	{
 		inputPopup.gameObject.SetActive(true);
-		resetInputFieldUp.text = fragReference.controllerValues.btnValues[currentBtnIndex].upValue;
+		resetInputFieldUp.text = fragReference.controllerValues.btnValues[currentBtnIndex].upValue;		
 		resetInputFieldDown.text = fragReference.controllerValues.btnValues[currentBtnIndex].downValue;
 		if(savedPref != 1)
 		{

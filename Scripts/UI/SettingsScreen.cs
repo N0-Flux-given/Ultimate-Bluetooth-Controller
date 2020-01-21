@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class SettingsScreen : MonoBehaviour
 {
-	private Button btnBack, btnRemapControls;
+	private Button btnBack, btnRemapControls, dampJoysticks;
 	private CanvasScript canvasReference;
 	private FragTest fragReference;
 
-	internal static string prefEncoding = "encoding", prefPressMode = "pressmode";
+	internal static string prefEncoding = "encoding", prefPressMode = "pressmode", prefDampJoysticks = "stick";
 
 	public Color txtDark, btnYellow, txtLight, btnGrey;
-	public Button btnASCII, btnUnicode, btnBinary, btnCont, btnPressRel;
+	public Button btnASCII, btnUnicode, btnBinary, btnCont, btnPressRel, btnSnapJoysticks;
+
+	public GameObject checkBoxJoystickFalse, checkBoxJoystickTrue;
 	   	 
 
 
@@ -23,6 +25,7 @@ public class SettingsScreen : MonoBehaviour
 		btnBack.onClick.AddListener(OnBackPress);
 		btnRemapControls = transform.Find("TopBar/Root/RemapControls/btnRemapControls").GetComponent<Button>();
 		btnRemapControls.onClick.AddListener(OnRemapControlsClick);
+		btnSnapJoysticks.onClick.AddListener(OnSnapJoystick);
 
 		btnASCII.onClick.AddListener(OnASCIIClick);
 		btnUnicode.onClick.AddListener(OnUnicodeClick);
@@ -93,6 +96,28 @@ public class SettingsScreen : MonoBehaviour
 			}
 		}
 
+		if(PlayerPrefs.GetInt(prefDampJoysticks) == -1) // -1 -> Pref does not exist, 0 -> false, 1 -> true
+		{
+			PlayerPrefs.SetInt(prefDampJoysticks, 0);
+			checkBoxJoystickFalse.SetActive(true);
+			checkBoxJoystickTrue.SetActive(false);	
+				
+		}
+		else
+		{
+			switch(PlayerPrefs.GetInt(prefDampJoysticks))
+			{
+				case 0: 
+					checkBoxJoystickFalse.SetActive(true);
+					checkBoxJoystickTrue.SetActive(false);
+					break;
+				case 1:
+					checkBoxJoystickFalse.SetActive(false);
+					checkBoxJoystickTrue.SetActive(true);
+					break;
+			}
+		}
+
 	}
 
 
@@ -110,6 +135,22 @@ public class SettingsScreen : MonoBehaviour
 		}
 	}
 
+
+	private void OnSnapJoystick()
+	{
+		if(PlayerPrefs.GetInt(prefDampJoysticks) == 0)
+		{
+			PlayerPrefs.SetInt(prefDampJoysticks, 1);
+			checkBoxJoystickFalse.SetActive(false);
+			checkBoxJoystickTrue.SetActive(true);
+		}
+		else
+		{
+			PlayerPrefs.SetInt(prefDampJoysticks, 0);
+			checkBoxJoystickFalse.SetActive(true);
+			checkBoxJoystickTrue.SetActive(false);
+		}
+	}
 
 	private void OnASCIIClick()
 	{

@@ -52,10 +52,10 @@ public class MainMenuScript : MonoBehaviour
 
 
 	private void OnDisable()
-	{
+	{  
 		CanvasScript.BackEvent -= OnBackPress;
 		FragTest.BluetoothStateUpdate -= OnBluetoothStateChange;
-		FragTest.OnResumeEvent -= OnResumeCallback;
+		FragTest.OnResumeEvent -= OnResumeCallback;  
 
 	}
 
@@ -64,14 +64,14 @@ public class MainMenuScript : MonoBehaviour
 		//canvasReference.TransitionToPopup(CanvasScript.Screens.EnableBTPrompt, true);
 		canvasReference.TransitionToScreen(CanvasScript.Screens.MainScreen, CanvasScript.Screens.TankControlsScreen);
 	}
-
+	   
 	private void OnSettingsClick()
 	{
 		canvasReference.TransitionToScreen(CanvasScript.Screens.MainScreen, CanvasScript.Screens.SettingsScreen);
 	}
 
 	private void OnCancelConnectionClick()
-	{
+	{    
 		fragTestReference.CancelConnection();
 	}
 
